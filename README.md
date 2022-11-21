@@ -57,9 +57,9 @@ If for any product the resulting number of pieces is less than or equal to zero,
 
 ## Testing
 
-In order to not spoil a production database, all tests are performed on a separate "store_test" database.
+In order to not spoil a production database, all tests are performed on a separate "store_test" database. Before each test, a transaction is initiated. After performing test case, a transaction rollback restores all tables to their initial state.
 
-Tests are using a different configuration file, settings.test.php
+Tests are using a different configuration file, settings.test.php.
 
 To perform full functional test range, please run command:
 ```
