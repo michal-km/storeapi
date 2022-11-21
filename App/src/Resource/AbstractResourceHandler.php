@@ -141,12 +141,15 @@ abstract class AbstractResourceHandler
                 'message' => $e->getMessage(),
             ];
         }
-        //$payload = Psr7\Stream::create(json_encode($data, JSON_PRETTY_PRINT) . PHP_EOL);
+        $payload = Psr7\Stream::create(json_encode($data, JSON_PRETTY_PRINT) . PHP_EOL);
 
-        return new Psr7\Response($returnCode, ['Content-Type' => 'application/json'], $payload)
+        $response = new Psr7\Response($returnCode, ['Content-Type' => 'application/json'], $payload);
+        $response = $response
             ->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+
+        return $response;
     }
 
     /**
