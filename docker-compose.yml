@@ -45,6 +45,15 @@ services:
       - database
     networks:
       - app
+  
+  # COMPOSER
+  composer:
+    image: composer:2
+    command: ["composer", "install"]
+    volumes:
+      - ./App:/app
+    depends_on:
+       - api
 
 networks:
   app:

@@ -9,3 +9,4 @@ RUN a2enmod rewrite
 RUN docker-php-ext-install pdo pdo_mysql opcache
 RUN apache2ctl restart
 
+
