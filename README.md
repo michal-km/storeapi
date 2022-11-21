@@ -14,6 +14,7 @@ git clone https://github.com/michal-km/storeapi.git
 cd storeapi
 docker-compose up -d
 ```
+Building and instalation could take several minutes, so please don't give up if the site is not responding just after running the command.
 
 ## Use
 
