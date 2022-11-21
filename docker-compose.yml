@@ -1,0 +1,52 @@
+version: "3"
+services:
+
+  # MYSQL+DEBIAN
+  database:
+    image: mysql:8.0-debian
+    container_name: gog_db
+    command: ["--default-authentication-plugin=mysql_native_password"]
+    restart: always
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: 'UltraSecretRootPassword'
+      MYSQL_DATABASE: store
+    networks: 
+      - app
+
+  # PHPMYADMIN  
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: gog_pma
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: 'UltraSecretRootPassword'
+      PHP_UPLOAD_MAX_FILESIZE: 1G
+      PHP_MAX_INPUT_VARS: 1G
+    ports:
+     - "8081:80"
+    depends_on:
+      - database
+    networks: 
+      - app
+
+  # PHP+DEBIAN
+  api:
+    build: .
+    container_name: gog_api
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./App:/var/www
+    depends_on:
+      - database
+    networks:
+      - app
+
+networks:
+  app:
+    driver: bridge
+
