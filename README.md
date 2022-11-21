@@ -50,7 +50,7 @@ PUT method needs more explanation. This action takes an array of data in form of
 	'id' => productId,
 	'quantity' => numberOfPieces
 }
-'''
+```
 There are no separate actions for adding and removing products to/from the cart. For both operations PUT action should be used.
 Positive quantity adds products to the cart, while negative quantity removes them. Basically, it tells the API how much pieces of given product be added or removed from the cart.
 If for any product the resulting number of pieces is less than or equal to zero, the product is removed from the cart.
