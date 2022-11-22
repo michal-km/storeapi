@@ -35,10 +35,8 @@ final class Product
 {
     /**
      * @OA\Parameter(
-     *     format="int64",
-     *     type="number",
+     *     name="id",
      *     description="The product identifier",
-     *     title="Product ID",
      *     example=39
      * )
      */
@@ -47,10 +45,8 @@ final class Product
 
     /**
      * @OA\Property(
-     *     format="string",
-     *     type="string",
+     *     name="Title",
      *     description="Product title",
-     *     title="Title",
      *     example="Baldur's Gate",
      *     minLength=1,
      *     maxLength=255
@@ -63,10 +59,8 @@ final class Product
 
     /**
      * @OA\Property(
-     *     format="number",
-     *     type="number",
+     *     name="Price",
      *     description="Product price (floating point)",
-     *     title="Price",
      *     example=3.99,
      *     minimum=0
      * )

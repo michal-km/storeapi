@@ -29,8 +29,7 @@ final class CartItem
 
     /**
      * @OA\Property(
-     *     format="string",
-     *     type="string",
+     *     name="CartId",
      *     description="Carti ID (globally uniqie identifier)",
      *     title="Cart ID",
      *     example="b0145a23-14db-4219-b02a-53de833e470d"
@@ -43,8 +42,7 @@ final class CartItem
 
     /**
      * @OA\Property(
-     *     format="int64r",
-     *     type="number",
+     *     name="ProductId",
      *     description="Product identifier",
      *     title="Product ID",
      *     example=39
@@ -57,8 +55,7 @@ final class CartItem
 
     /**
      * @OA\Property(
-     *     format="int64r",
-     *     type="number",
+     *     name="Quantity",
      *     description="Number of pieces.",
      *     title="Quantity",
      *     example=5
