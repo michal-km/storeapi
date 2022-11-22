@@ -2,12 +2,14 @@
 
 Two simple REST APIs for ecommerce purpose, available at http://localhost:8080.
 
-## Requirements
+## Installation with Docker
+
+### Requirements
 
 - Docker + docker-compose
 - an Internet connection (obviously).
 
-## Installation
+### Setup
 
 ```
 git clone https://github.com/michal-km/storeapi.git
@@ -15,6 +17,41 @@ cd storeapi
 docker-compose up -d
 ```
 Building and instalation could take several minutes, so please don't give up if the site is not responding just after running the command.
+
+## Installation without Docker
+
+### Requirements
+
+- MySQL server (local or remote)
+- PHP 8.1
+- Composer
+- an Internet connection (obviously).
+
+### Step 1: Clone repository
+
+```
+git clone https://github.com/michal-km/storeapi.git
+cd storeapi
+```
+### Step 2: Populate database
+
+Please import two SQL files into MySQL database using mysql command (https://dev.mysql.com/doc/mysql-backup-excerpt/8.0/en/reloading-sql-format-dumps.html) or another favourite tool. After that, two distinct databases would be created and populated with initial data.
+Also, please set up correct host, port, login and password in two settings files:
+- App/settings.php (for "production" use)
+- App/settings.test.php (for test suite, because test should be performed on "production" database)
+
+### Step 3: Intall dependencies
+
+```
+cd App/public
+composer install
+```
+
+### Step 4: Run the application
+
+```
+php -S localhost:8080
+```
 
 ## Use
 
