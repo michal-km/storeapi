@@ -28,7 +28,7 @@ final class OpenApi extends AbstractResourceHandler implements RequestHandlerInt
      */
     protected function processRequest(ServerRequestInterface $request): mixed
     {
-        $swagger = \OpenApi\Generator::scan([__DIR__, , __DIR__ . '/../../Entity']);
+        $swagger = \OpenApi\Generator::scan([__DIR__, __DIR__ . '/../../Entity']);
         return $swagger;
     }
 }
