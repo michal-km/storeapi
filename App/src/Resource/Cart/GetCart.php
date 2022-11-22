@@ -16,7 +16,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Container\ContainerInterface;
 use App\Resource\AbstractResourceHandler;
-use App\Resource\Cart\CartToolsTrait;
 use App\Validator\Validator;
 use App\Repository\Cart;
 
@@ -28,8 +27,6 @@ use App\Repository\Cart;
  */
 final class GetCart extends AbstractResourceHandler implements RequestHandlerInterface
 {
-    use CartToolsTrait;
-
     /**
      * {@inheritDoc}
      *

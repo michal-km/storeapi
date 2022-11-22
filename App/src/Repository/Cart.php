@@ -48,14 +48,14 @@ class Cart
         }
     }
 
-    public function clearCart(): void
+    public function clear(): void
     {
-        foreach ($this->cartItems as $item) {
-            $product = $this->entityManager->getRepository(ProductEntity::class)->find($item->getProductId());
-            if ($product) {
-                $this->entityManager->remove($product);
-            }
-        }
+        $qb = $this->entityManager->createQueryBuilder()
+            ->delete('App\Entity\CartItem', 'c')
+            ->where('c.CartId = :guid')
+            ->setParameter('guid', $this->cartId);
+        $query = $qb->getQuery();
+        $query->execute();
         $this->entityManager->flush();
         $this->cartItems = [];
         $this->resetChanges();

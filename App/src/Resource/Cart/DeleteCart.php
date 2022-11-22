@@ -15,17 +15,14 @@ namespace App\Resource\Cart;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Resource\AbstractResourceHandler;
-use App\Resource\Cart\CartToolsTrait;
 use App\Validator\Validator;
-use App\Entity\Product;
+use App\Repository\Cart;
 
 /**
  * DELETE /store/api/v1/carts/{id}
  */
 final class DeleteCart extends AbstractResourceHandler implements RequestHandlerInterface
 {
-    use CartToolsTrait;
-
     /**
      * {@inheritDoc}
      *
@@ -57,22 +54,17 @@ final class DeleteCart extends AbstractResourceHandler implements RequestHandler
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "user");
-        $id = validator::validateString('id', $request->getAttribute('id'));
-        $p = $this->getCartItems($id);
-        if (count($p) == 0) {
+        $cartId = validator::validateString('id', $request->getAttribute('id'));
+
+        $cart = new Cart($this->getServiceContainer(), $cartId);
+        if ($cart->isEmpty()) {
             throw new \Exception("Cart not found", 404);
         }
 
-        $em = $this->getEntityManager();
+        $cart->clear();
 
-        foreach ($p as $item) {
-            $em->remove($item);
-        }
-        $em->flush();
-
-        $data = [
+        return [
             'status' => 'deleted',
         ];
-        return $data;
     }
 }

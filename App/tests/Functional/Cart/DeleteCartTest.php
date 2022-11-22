@@ -27,8 +27,8 @@ class DeleteCartTest extends FunctionalTestCase
 
         // is cart deleted?
         $cartRepository = $this->getEntityManager()->getRepository(CartItem::class);
-        $cart = $cartRepository->find(1);
-        $this->assertNull($cart);
+        $cart = $cartRepository->findBy(['CartId' => 'cfe30122-74a6-4cf8-bb02-3522abf790a0']);
+        $this->assertEmpty($cart);
 
         // try deleting again
         $request = $this->createRequest('DELETE', '/store/api/v1/carts/cfe30122-74a6-4cf8-bb02-3522abf790a0');
