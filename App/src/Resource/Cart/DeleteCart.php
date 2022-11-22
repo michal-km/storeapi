@@ -32,6 +32,9 @@ final class DeleteCart extends AbstractResourceHandler implements RequestHandler
      *     tags={"cart"},
      *     path="/store/api/v1/carts/{id}",
      *     operationId="deleteCart",
+     *     summary = "Removes the cart and its content.",
+     *     description="Cart identifier can be used again, adding products to it will create a new cart.",
+     *
      *     @OA\Parameter(
      *          name="id",
      *          in="path",
