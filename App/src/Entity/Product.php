@@ -34,7 +34,7 @@ use Doctrine\ORM\Mapping\Table;
 final class Product
 {
     /**
-     * @OA\Parameter(
+     * @OA\Property(
      *     description="The product identifier",
      *     example=39
      * )
