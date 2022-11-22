@@ -35,7 +35,6 @@ final class Product
 {
     /**
      * @OA\Parameter(
-     *     name="id",
      *     description="The product identifier",
      *     example=39
      * )
@@ -45,7 +44,6 @@ final class Product
 
     /**
      * @OA\Property(
-     *     name="Title",
      *     description="Product title",
      *     example="Baldur's Gate",
      *     minLength=1,
@@ -59,7 +57,6 @@ final class Product
 
     /**
      * @OA\Property(
-     *     name="Price",
      *     description="Product price (floating point)",
      *     example=3.99,
      *     minimum=0
