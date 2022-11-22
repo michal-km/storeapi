@@ -31,34 +31,30 @@ final class PutNewCart extends PutCart
      *
      *     @OA\RequestBody(
      *         required=true,
+     *         description="Array with one or more products to be inserted to the cart.",
      *         @OA\JsonContent(
      *            required={"items"},
      *            @OA\Property(
      *                property="items",
      *                type="array",
      *                @OA\Items(
-     *                    @OA\Property(
-     *                        property="id",
-     *                        type="integer",
-     *                        example=39
-     *                    ),
-     *                    @OA\Property(
-     *                        property="quantity",
-     *                        type="integer",
-     *                        example=4
-     *                    ),
+     *                    @OA\Property(property="product.id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *                    @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
      *                ),
      *            ),
      *         ),
      *      ),
+     *
      *     @OA\Response(
      *      response="201",
      *      description="Cart was created successfully",
      *     ),
+     *
      *     @OA\Response(
      *      response="400",
      *      description="Invalid input data",
      *     ),
+     *
      *    @OA\Response(
      *      response="500",
      *      description="Server error",

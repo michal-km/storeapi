@@ -31,55 +31,24 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
      *     operationId="patchProduct",
      *     summary = "Updates a product in the catalog.",
      *
-     *     @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          required=true,
-     *          description="The product ID",
-     *          @OA\Schema(
-     *              type="string"
-     *          ),
-     *     ),
+     *     @OA\Parameter(name="id", in="path", required=true, description="The product ID", @OA\Schema(type="string")),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *            @OA\Property(
-     *                property="title",
-     *                type="string",
-     *                format="string",
-     *                example="A title",
-     *                minLength=1,
-     *                maxLength=255
-     *            ),
-     *            @OA\Property(
-     *                property="price",
-     *                type="number",
-     *                example="6.99",
-     *                minimum=0
-     *            ),
+     *            @OA\Property(property="title", type="string", format="string", example="Baldur's Gate", minLength=1, maxLength=255),
+     *            @OA\Property(property="price", type="number", example=6.99, minimum=0),
      *         ),
      *      ),
+     *
      *     @OA\Response(
      *      response="200",
      *      description="Product was updated successfully",
      *      @OA\JsonContent(
      *          type="array",
      *          @OA\Items(
-     *              @OA\Property(
-     *                  property="id",
-     *                  type="integer",
-     *                  example=39
-     *              ),
-     *              @OA\Property(
-     *                  property="title",
-     *                  type="string",
-     *                  example="Baldur's Gate"
-     *              ),
-     *              @OA\Property(
-     *                  property="price",
-     *                  type="number",
-     *                  example=3.99
-     *              ),
+     *              @OA\Property(property="id", ref="#/components/schemas/Product/properties/id"),
+     *              @OA\Property(property="title", ref="#/components/schemas/Product/properties/Title"),
+     *              @OA\Property(property="price", ref="#/components/schemas/Product/properties/Price"),
      *              @OA\Property(
      *                  property="link",
      *                  type="string",
@@ -88,27 +57,16 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
      *          ),
      *      )
      *     ),
+     *
      *    @OA\Response(
      *      response="304",
      *      description="Product was not changed",
      *      @OA\JsonContent(
      *          type="array",
      *          @OA\Items(
-     *              @OA\Property(
-     *                  property="id",
-     *                  type="integer",
-     *                  example=39
-     *              ),
-     *              @OA\Property(
-     *                  property="title",
-     *                  type="string",
-     *                  example="Baldur's Gate"
-     *              ),
-     *              @OA\Property(
-     *                  property="price",
-     *                  type="number",
-     *                  example=3.99
-     *              ),
+     *              @OA\Property(property="id", ref="#/components/schemas/Product/properties/id"),
+     *              @OA\Property(property="title", ref="#/components/schemas/Product/properties/Title"),
+     *              @OA\Property(property="price", ref="#/components/schemas/Product/properties/Price"),
      *              @OA\Property(
      *                  property="link",
      *                  type="string",
@@ -117,10 +75,12 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
      *          ),
      *      )
      *     ),
+     *
      *     @OA\Response(
      *      response="400",
      *      description="Invalid input data",
      *     ),
+     *
      *    @OA\Response(
      *      response="500",
      *      description="Server error",

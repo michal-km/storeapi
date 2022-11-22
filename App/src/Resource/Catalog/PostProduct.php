@@ -35,43 +35,20 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
      *         required=true,
      *         @OA\JsonContent(
      *            required={"title", "price"},
-     *            @OA\Property(
-     *                property="title",
-     *                type="string",
-     *                format="string",
-     *                example="A title",
-     *                minLength=1,
-     *                maxLength=255
-     *            ),
-     *            @OA\Property(
-     *                property="price",
-     *                type="number",
-     *                example="6.99",
-     *                minimum=0
-     *            ),
+     *            @OA\Property(property="title", type="string", format="string", example="Baldur's Gate", minLength=1, maxLength=255),
+     *            @OA\Property(property="price", type="number", example=6.99, minimum=0),
      *         ),
      *      ),
+     *
      *     @OA\Response(
      *      response="201",
      *      description="Product was created successfully",
      *      @OA\JsonContent(
      *          type="array",
      *          @OA\Items(
-     *              @OA\Property(
-     *                  property="id",
-     *                  type="integer",
-     *                  example=39
-     *              ),
-     *              @OA\Property(
-     *                  property="title",
-     *                  type="string",
-     *                  example="Baldur's Gate"
-     *              ),
-     *              @OA\Property(
-     *                  property="price",
-     *                  type="number",
-     *                  example=3.99
-     *              ),
+     *              @OA\Property(property="id", ref="#/components/schemas/Product/properties/id"),
+     *              @OA\Property(property="title", ref="#/components/schemas/Product/properties/Title"),
+     *              @OA\Property(property="price", ref="#/components/schemas/Product/properties/Price"),
      *              @OA\Property(
      *                  property="link",
      *                  type="string",
@@ -80,10 +57,12 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
      *          ),
      *      )
      *     ),
+     *
      *     @OA\Response(
      *      response="400",
      *      description="Invalid input data",
      *     ),
+     *
      *    @OA\Response(
      *      response="500",
      *      description="Server error",

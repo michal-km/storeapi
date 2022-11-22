@@ -30,43 +30,19 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
      *     path="/catalog/api/v1/products",
      *     operationId="listProducts",
      *     summary = "Lists all the products from the catalog.",
-     *     description = "Results are spli to pages with three items on each.
-     *                    To fetch the first page, call the action without providing a cursor (or set it to 0).
-     *                    To fetch next page, use link provided in meta/cursor.next field, or use cursor variable as ID
-     *                    of the first product on the page.
-     *                    If there are no more results, no link is provided.
-     *                    If the cursor value is greater than the ID of any product, an empty set will be returned.",
+     *     description = "Results are spli to pages with three items on each. To fetch the first page, call the action without providing a cursor (or set it to 0). To fetch next page, use link provided in meta/cursor.next field, or use cursor variable as ID of the first product on the page. If there are no more results, no link is provided. If the cursor value is greater than the ID of any product, an empty set will be returned.",
      *
-     *     @OA\Parameter(
-     *          name="cursor",
-     *          in="query",
-     *          required=false,
-     *          description="ID of the first product in result set",
-     *          @OA\Schema(
-     *              type="integer"
-     *          ),
-     *     ),
+     *     @OA\Parameter(name="cursor", in="query", required=false, description="ID of the first product in result set. This parameter is optional. For the first page, use 0 or not provide value at all.", @OA\Schema( type="integer")),
+
      *     @OA\Response(
      *      response="200",
      *      description="List products",
      *      @OA\JsonContent(
      *          type="array",
      *          @OA\Items(
-     *              @OA\Property(
-     *                  property="id",
-     *                  type="integer",
-     *                  example=39
-     *              ),
-     *              @OA\Property(
-     *                  property="title",
-     *                  type="string",
-     *                  example="Baldur's Gate"
-     *              ),
-     *              @OA\Property(
-     *                  property="price",
-     *                  type="number",
-     *                  example=3.99
-     *              ),
+     *              @OA\Property(property="id", ref="#/components/schemas/Product/properties/id"),
+     *              @OA\Property(property="title", ref="#/components/schemas/Product/properties/Title"),
+     *              @OA\Property(property="price", ref="#/components/schemas/Product/properties/Price"),
      *              @OA\Property(
      *                  property="link",
      *                  type="string",

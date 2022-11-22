@@ -35,23 +35,18 @@ final class DeleteCart extends AbstractResourceHandler implements RequestHandler
      *     summary = "Removes the cart and its content.",
      *     description="Cart identifier can be used again, adding products to it will create a new cart.",
      *
-     *     @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          required=true,
-     *          description="The cart ID",
-     *          @OA\Schema(
-     *              type="string"
-     *          ),
-     *     ),
+     *     @OA\Parameter(name="id", in="path", required=true, description="The cart ID", @OA\Schema(type="string")),
+     *
      *     @OA\Response(
      *      response="200",
      *      description="Cart was deleted successfully",
      *     ),
+     *
      *     @OA\Response(
      *      response="404",
      *      description="Cart not found",
      *     ),
+     *
      *     @OA\Response(
      *      response="500",
      *      description="Server error",

@@ -35,7 +35,6 @@ final class Product
 {
     /**
      * @OA\Property(
-     *     property="id",
      *     description="The product identifier",
      *     example=39
      * )

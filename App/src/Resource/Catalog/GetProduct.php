@@ -32,36 +32,17 @@ final class GetProduct extends AbstractResourceHandler implements RequestHandler
      *     operationId="getProduct",
      *     summary = "Returns all information about the single product.",
      *
-     *     @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          required=true,
-     *          description="The product ID",
-     *          @OA\Schema(
-     *              type="string"
-     *          ),
-     *     ),
+     *     @OA\Parameter(name="id", in="path", required=true, description="The product ID", @OA\Schema(type="integer")),
+     *
      *     @OA\Response(
      *      response="200",
      *      description="Product object",
      *      @OA\JsonContent(
      *          type="array",
      *          @OA\Items(
-     *              @OA\Property(
-     *                  property="id",
-     *                  type="integer",
-     *                  example=39
-     *              ),
-     *              @OA\Property(
-     *                  property="title",
-     *                  type="string",
-     *                  example="Baldur's Gate"
-     *              ),
-     *              @OA\Property(
-     *                  property="price",
-     *                  type="number",
-     *                  example=3.99
-     *              ),
+     *              @OA\Property(property="id", ref="#/components/schemas/Product/properties/id"),
+     *              @OA\Property(property="title", ref="#/components/schemas/Product/properties/Title"),
+     *              @OA\Property(property="price", ref="#/components/schemas/Product/properties/Price"),
      *              @OA\Property(
      *                  property="link",
      *                  type="string",
@@ -70,6 +51,7 @@ final class GetProduct extends AbstractResourceHandler implements RequestHandler
      *          ),
      *      )
      *     ),
+     *
      *     @OA\Response(
      *      response="404",
      *      description="Product not found",

@@ -36,27 +36,31 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
      *     operationId="getCart",
      *     summary = "Returns all the products added to a cart with given identifier, along with total sum.",
      *
-     *     @OA\Parameter(
-     *          name="id",
-     *          in="path",
-     *          required=true,
-     *          description="The cart ID",
-     *          @OA\Schema(
-     *              type="string"
-     *          ),
-     *     ),
+     *     @OA\Parameter(name="id", in="path", required=true, description="The cart ID", @OA\Schema(type="string")),
+     *
      *     @OA\Response(
      *      response="200",
      *      description="A cart containing an array with added products",
+     *      @OA\JsonContent(
+     *          title="items",
+     *          type="array",
+     *          @OA\Items(
+     *              @OA\Property(property="product.id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *              @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
+     *          ),
+     *      ),
      *     ),
+     *
      *     @OA\Response(
      *      response="404",
      *      description="Cart with a given ID could not be found",
      *     ),
+     *
      *     @OA\Response(
      *      response="400",
      *      description="Invalid ID parameter",
      *     ),
+     *
      *    @OA\Response(
      *      response="500",
      *      description="Server error",
