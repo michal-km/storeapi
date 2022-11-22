@@ -38,19 +38,25 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
      *      response="200",
      *      description="List products",
      *      @OA\JsonContent(
-     *          type="array",
-     *          @OA\Items(
-     *              @OA\Property(property="id", ref="#/components/schemas/Product/properties/id"),
-     *              @OA\Property(property="title", ref="#/components/schemas/Product/properties/Title"),
-     *              @OA\Property(property="price", ref="#/components/schemas/Product/properties/Price"),
-     *              @OA\Property(
-     *                  property="link",
-     *                  type="string",
-     *                  example="http://localhost:8080/catalog/api/v1/product/39"
+     *          @OA\Property(
+     *                  type="array",
+     *                  title="products",
+     *                  property="products",
+     *                  @OA\Items(
+     *                      @OA\Property(property="id", ref="#/components/schemas/Product/properties/id"),
+     *                      @OA\Property(property="title", ref="#/components/schemas/Product/properties/Title"),
+     *                      @OA\Property(property="price", ref="#/components/schemas/Product/properties/Price"),
+     *                      @OA\Property(property="link", type="string", example="http://localhost:8080/catalog/api/v1/product/39"),
+     *                  ),
+     *              ),
+     *          @OA\Property(
+     *              title="meta",
+     *              property="meta",
+     *              @OA\Property(property="total.count", type="number", example="1"),
+     *              @OA\Property(property="cursor.next", type="string", example="http://localhost:8080/catalog/api/v1/product/39"),
      *              ),
      *          ),
-     *      )
-     *     )
+     *     ),
      * )
      */
     protected function processRequest(ServerRequestInterface $request): mixed

@@ -45,6 +45,7 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
      *      description="Product was created successfully",
      *      @OA\JsonContent(
      *          type="array",
+     *          title="product",
      *          @OA\Items(
      *              @OA\Property(property="id", ref="#/components/schemas/Product/properties/id"),
      *              @OA\Property(property="title", ref="#/components/schemas/Product/properties/Title"),
