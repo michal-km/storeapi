@@ -14,9 +14,11 @@ namespace App\Resource\Cart;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Container\ContainerInterface;
 use App\Resource\AbstractResourceHandler;
 use App\Resource\Cart\CartToolsTrait;
 use App\Validator\Validator;
+use App\Repository\Cart;
 
 /**
  * @OA\Server(url="http://localhost:8080")
@@ -89,11 +91,11 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
         $this->authorize($request, "user");
         $cartId = Validator::validateString('id', $request->getAttribute('id'));
 
-        $cartItems = $this->getCartItems($cartId);
-        if (count($cartItems) === null) {
+        $cart = new Cart($this->getServiceContainer(), $cartId);
+        if ($cart->isEmpty()) {
             throw new \Exception('Cart not found', 404);
         }
 
-        return $this->getCartJSON($cartId);
+        return $cart->getJSON($this->getServer());
     }
 }

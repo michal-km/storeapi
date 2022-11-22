@@ -47,7 +47,7 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
      *                property="items",
      *                type="array",
      *                @OA\Items(
-     *                    @OA\Property(property="product.id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *                    @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
      *                    @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
      *                ),
      *            ),
@@ -151,7 +151,6 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "user");
-        $server = 'http://localhost:8080/';
         $created = false;
 
         $id = $request->getAttribute('id');

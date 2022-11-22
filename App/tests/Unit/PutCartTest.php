@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit;
 
-use Doctrine\ORM\EntityManager;
+use Psr\Container\ContainerInterface;
 use App\Resource\Cart\PutCart;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +20,7 @@ final class PutCartTest extends TestCase
 {
     public function testGetCartId(): void
     {
-        $em = $this->createStub(EntityManager::class);
+        $em = $this->createStub(ContainerInterface::class);
         $pc = new PutCart($em);
         $cartId = $pc->getCartId(null);
         $this->assertNotNull($cartId);

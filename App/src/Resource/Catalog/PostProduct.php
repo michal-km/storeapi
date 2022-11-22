@@ -74,22 +74,10 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "catalog administrator");
-        $server = 'http://localhost:8080/';
-        $title = '';
-        $price = 0;
 
         $params = $request->getParsedBody();
-        if (isset($params['title'])) {
-            $title = Validator::validateString('title', $params['title']);
-        } else {
-            throw new \Exception('Invalid input data', 400);
-        }
-
-        if (isset($params['price'])) {
-            $price = Validator::validatePrice('price', $params['price']);
-        } else {
-            throw new \Exception('Invalid input data', 400);
-        }
+        $title = $this->requireParameter($params, 'title', 'string');
+        $price = $this->requireParameter($params, 'price', 'price');
 
         $em = $this->getEntityManager();
         $productRepository = $this->getEntityManager()->getRepository(Product::class);
@@ -107,7 +95,7 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
         }
 
         return [
-            'product' => $product->getJSON($server . 'catalog/api/v1/products/'),
+            'product' => $product->getJSON($this->getServer() . 'catalog/api/v1/products/'),
             'code' => 201,
         ];
     }

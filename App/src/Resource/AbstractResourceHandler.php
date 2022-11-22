@@ -14,23 +14,33 @@ namespace App\Resource;
 
 use Doctrine\ORM\EntityManager;
 use Nyholm\Psr7\ServerRequest;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Nyholm\Psr7;
+use App\Validator\Validator;
 
 /**
  * Abstract handler for API actions.
  */
 abstract class AbstractResourceHandler
 {
-    private EntityManager $entityManager;
+    private ContainerInterface $serviceContainer;
 
     /**
      * {@inheritDoc}
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(ContainerInterface $serviceContainer)
     {
-        $this->entityManager = $entityManager;
+        $this->serviceContainer = $serviceContainer;
+    }
+
+    /**
+     * @return ContainerInterface An instance of ServiceContainer.
+     */
+    protected function getServiceContainer(): ContainerInterface
+    {
+        return $this->serviceContainer;
     }
 
     /**
@@ -38,7 +48,7 @@ abstract class AbstractResourceHandler
      */
     protected function getEntityManager(): EntityManager
     {
-        return $this->entityManager;
+        return $this->serviceContainer->get(EntityManager::class);
     }
 
     /**
@@ -90,6 +100,45 @@ abstract class AbstractResourceHandler
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
 
         return $response;
+    }
+
+    /**
+     * Returns a path to the API server.
+     *
+     * @return Base API URL.
+     */
+    protected function getServer(): string
+    {
+        return 'http://localhost:8080/';
+    }
+
+    /**
+     * Gets and validates parameter from POST or GET array.
+     */
+    protected function requireParameter($params, string $name, string $type, bool $required = true): mixed
+    {
+        if (!isset($params[$name])) {
+            if ($required) {
+                throw new \Exception('Invalid input data (' . $name . ')', 400);
+            } else {
+                return null;
+            }
+        }
+        $value = $params[$name];
+
+        switch ($type) {
+            case 'string':
+                $value = Validator::validateString($name, $value);
+                break;
+            case 'integer':
+                $value = Validator::validateString($name, $value);
+                break;
+            case 'price':
+                $value = Validator::validatePrice($name, $value);
+                break;
+        }
+
+        return $value;
     }
 
     /**

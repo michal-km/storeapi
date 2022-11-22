@@ -91,7 +91,6 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "catalog administrator");
-        $server = 'http://localhost:8080/';
         $em = $this->getEntityManager();
         $productRepository = $em->getRepository(Product::class);
 
@@ -103,8 +102,10 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
 
         $changes = 0;
         $params = $request->getParsedBody();
-        if (isset($params['title'])) {
-            $title = Validator::validateString('title', $params['title']);
+        $title = $this->requireParameter($params, 'title', 'string', false);
+        $price = $this->requireParameter($params, 'price', 'price', false);
+
+        if ($title) {
             if ($product->getTitle() !== $title) {
                 $existingProduct = $productRepository->findOneBy(['Title' => $title]);
                 if (null !== $existingProduct) {
@@ -114,8 +115,8 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
                 $changes++;
             }
         }
-        if (isset($params['price'])) {
-            $price = Validator::validatePrice('price', $params['price']);
+
+        if ($price) {
             if ($product->getPrice() !== $price) {
                 $product->setPrice($price);
                 $changes++;
@@ -130,7 +131,7 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
         }
 
         return [
-            'product' => $product->getJSON($server . 'catalog/api/v1/products/'),
+            'product' => $product->getJSON($this->getServer() . 'catalog/api/v1/products/'),
         ];
     }
 }

@@ -63,7 +63,6 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "user");
-        $server = 'http://localhost:8080/';
         $pageSize = 3;
         $params = $request->getQueryParams();
         $cursor = (isset($params['cursor'])) ? Validator::validateInteger('cursor', $params['cursor']) : 0;
@@ -73,7 +72,7 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
         $productList = [];
         $products = $productRepository->findBy([], [], $pageSize, $cursor);
         foreach ($products as $p) {
-            $productList[] = $p->getJSON($server . 'catalog/api/v1/products/');
+            $productList[] = $p->getJSON($this->getServer() . 'catalog/api/v1/products/');
         }
 
         // find next product id
@@ -97,7 +96,7 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
             ],
         ];
         if ($next) {
-            $data['meta']['cursor.next'] = $server . 'catalog/api/v1/products?cursor=' . $next;
+            $data['meta']['cursor.next'] = $this->getServer() . 'catalog/api/v1/products?cursor=' . $next;
         }
         return $data;
     }

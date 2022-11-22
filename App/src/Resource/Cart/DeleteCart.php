@@ -57,7 +57,6 @@ final class DeleteCart extends AbstractResourceHandler implements RequestHandler
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "user");
-        $server = 'http://localhost:8080/';
         $id = validator::validateString('id', $request->getAttribute('id'));
         $p = $this->getCartItems($id);
         if (count($p) == 0) {

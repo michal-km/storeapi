@@ -15,7 +15,6 @@ namespace App\Service;
 use Slim\App;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Doctrine\ORM\EntityManager;
 
 abstract class AbstractController
 {
@@ -39,8 +38,7 @@ abstract class AbstractController
         $this->getServiceContainer()->set(
             $className,
             static function (ContainerInterface $c) use ($className): RequestHandlerInterface {
-                $entityManager = $c->get(EntityManager::class);
-                return new $className($entityManager);
+                return new $className($c);
             }
         );
         $this->app->map($methods, $uri, $className);

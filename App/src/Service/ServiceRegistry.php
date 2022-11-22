@@ -22,6 +22,7 @@ use Slim\Handlers\Strategies\RequestHandler;
 use App\Controller\ProductApiController;
 use App\Controller\CartApiController;
 use App\Controller\SwaggerController;
+use App\Repository\Cart;
 
 final class ServiceRegistry implements ServiceProvider
 {
@@ -59,6 +60,10 @@ final class ServiceRegistry implements ServiceProvider
 
         $c->set(SwaggerController::class, static function (ContainerInterface $c): SwaggerController {
             return new SwaggerController($c);
+        });
+
+        $c->set(Cart::class, static function (ContainerInterface $c): Cart {
+            return new Cart($c);
         });
     }
 }

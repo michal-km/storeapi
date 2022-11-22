@@ -62,7 +62,6 @@ final class GetProduct extends AbstractResourceHandler implements RequestHandler
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "user");
-        $server = 'http://localhost:8080/';
         $id = Validator::validateInteger('id', $request->getAttribute('id'));
         $productRepository = $this->getEntityManager()->getRepository(Product::class);
         $product = $productRepository->find($id);
@@ -71,7 +70,7 @@ final class GetProduct extends AbstractResourceHandler implements RequestHandler
         }
 
         return [
-            'product' => $product->getJSON($server . 'catalog/api/v1/products/'),
+            'product' => $product->getJSON($this->getServer() . 'catalog/api/v1/products/'),
         ];
     }
 }

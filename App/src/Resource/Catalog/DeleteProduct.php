@@ -53,7 +53,6 @@ final class DeleteProduct extends AbstractResourceHandler implements RequestHand
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "catalog administrator");
-        $server = 'http://localhost:8080/';
         $id = Validator::validateInteger('id', $request->getAttribute('id'));
         $em = $this->getEntityManager();
         $productRepository = $em->getRepository(Product::class);
