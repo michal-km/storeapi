@@ -16,6 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Resource\AbstractResourceHandler;
 use App\Resource\Cart\CartToolsTrait;
+use App\Validator\Validator;
 
 /**
  * @OA\Server(url="http://localhost:8080")
@@ -86,7 +87,7 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
     protected function processRequest(ServerRequestInterface $request): mixed
     {
         $this->authorize($request, "user");
-        $cartId = $this->validateString('id', $request->getAttribute('id'));
+        $cartId = Validator::validateString('id', $request->getAttribute('id'));
 
         $cartItems = $this->getCartItems($cartId);
         if (count($cartItems) === null) {

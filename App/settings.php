@@ -13,13 +13,13 @@ declare(strict_types=1);
 return [
     'settings' => [
         'slim' => [
-            'displayErrorDetails' => false,
-            'logErrors' => false,
-            'logErrorDetails' => false,
+            'displayErrorDetails' => true,
+            'logErrors' => true,
+            'logErrorDetails' => true,
         ],
 
         'doctrine' => [
-            'dev_mode' => false,
+            'dev_mode' => true,
             'cache_dir' => __DIR__ . '/var/doctrine',
             'metadata_dirs' => [__DIR__ . '/src/Domain'],
             'connection' => [

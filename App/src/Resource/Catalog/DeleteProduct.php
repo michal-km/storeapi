@@ -15,6 +15,7 @@ namespace App\Resource\Catalog;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Resource\AbstractResourceHandler;
+use App\Validator\Validator;
 use App\Entity\Product;
 
 /**
@@ -53,7 +54,7 @@ final class DeleteProduct extends AbstractResourceHandler implements RequestHand
     {
         $this->authorize($request, "catalog administrator");
         $server = 'http://localhost:8080/';
-        $id = $this->validateInteger('id', $request->getAttribute('id'));
+        $id = Validator::validateInteger('id', $request->getAttribute('id'));
         $em = $this->getEntityManager();
         $productRepository = $em->getRepository(Product::class);
         $p = $productRepository->find($id);

@@ -15,6 +15,7 @@ namespace App\Resource\Catalog;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Resource\AbstractResourceHandler;
+use App\Validator\Validator;
 use App\Entity\Product;
 
 /**
@@ -94,7 +95,7 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
         $em = $this->getEntityManager();
         $productRepository = $em->getRepository(Product::class);
 
-        $id = $this->validateInteger('id', $request->getAttribute('id'));
+        $id = Validator::validateInteger('id', $request->getAttribute('id'));
         $product = $productRepository->find($id);
         if (!$product) {
             throw new \Exception("Product not found", 404);
@@ -103,7 +104,7 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
         $changes = 0;
         $params = $request->getParsedBody();
         if (isset($params['title'])) {
-            $title = $this->validateString('title', $params['title']);
+            $title = Validator::validateString('title', $params['title']);
             if ($product->getTitle() !== $title) {
                 $existingProduct = $productRepository->findOneBy(['Title' => $title]);
                 if (null !== $existingProduct) {
@@ -114,7 +115,7 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
             }
         }
         if (isset($params['price'])) {
-            $price = $this->validatePrice('price', $params['price']);
+            $price = Validator::validatePrice('price', $params['price']);
             if ($product->getPrice() !== $price) {
                 $product->setPrice($price);
                 $changes++;

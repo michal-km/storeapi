@@ -15,6 +15,7 @@ namespace App\Resource\Catalog;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Resource\AbstractResourceHandler;
+use App\Validator\Validator;
 use App\Entity\Product;
 
 /**
@@ -65,7 +66,7 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
         $server = 'http://localhost:8080/';
         $pageSize = 3;
         $params = $request->getQueryParams();
-        $cursor = (isset($params['cursor'])) ? $this->validateInteger('cursor', $params['cursor']) : 0;
+        $cursor = (isset($params['cursor'])) ? Validator::validateInteger('cursor', $params['cursor']) : 0;
         $productRepository = $this->getEntityManager()->getRepository(Product::class);
 
         // get product list

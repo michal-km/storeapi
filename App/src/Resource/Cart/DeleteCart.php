@@ -16,6 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Resource\AbstractResourceHandler;
 use App\Resource\Cart\CartToolsTrait;
+use App\Validator\Validator;
 use App\Entity\Product;
 
 /**
@@ -57,7 +58,7 @@ final class DeleteCart extends AbstractResourceHandler implements RequestHandler
     {
         $this->authorize($request, "user");
         $server = 'http://localhost:8080/';
-        $id = $this->validateString('id', $request->getAttribute('id'));
+        $id = validator::validateString('id', $request->getAttribute('id'));
         $p = $this->getCartItems($id);
         if (count($p) == 0) {
             throw new \Exception("Cart not found", 404);

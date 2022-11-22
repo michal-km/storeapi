@@ -16,6 +16,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Resource\AbstractResourceHandler;
 use App\Resource\Cart\CartToolsTrait;
+use App\Validator\Validator;
 use App\Entity\CartItem;
 
 /**
@@ -197,7 +198,7 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
     {
         $cartId = null;
         if (!empty($idParam)) {
-            $cartId = trim($this->validateString('id', $idParam));
+            $cartId = trim(Validator::validateString('id', $idParam));
             $i = $this->getEntityManager()->getRepository(CartItem::class)->findBy(['CartId' => $cartId]);
             if (count($i) === null) {
                 $cartId = null;
@@ -253,8 +254,8 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
             if (!isset($item['id']) || !isset($item['quantity'])) {
                 throw new \Exception('Invalid data', 400);
             }
-            $id = $this->validateInteger('id', $item['id']);
-            $quantity = $this->validateInteger('quantity', $item['quantity']);
+            $id = Validator::validateInteger('id', $item['id']);
+            $quantity = Validator::validateInteger('quantity', $item['quantity']);
             if (0 !== $quantity) {
                 if (isset($cartItems[$id])) {
                     // update existing product

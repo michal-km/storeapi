@@ -15,6 +15,7 @@ namespace App\Resource\Catalog;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use App\Resource\AbstractResourceHandler;
+use App\Validator\Validator;
 use App\Entity\Product;
 
 /**
@@ -79,13 +80,13 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
 
         $params = $request->getParsedBody();
         if (isset($params['title'])) {
-            $title = $this->validateString('title', $params['title']);
+            $title = Validator::validateString('title', $params['title']);
         } else {
             throw new \Exception('Invalid input data', 400);
         }
 
         if (isset($params['price'])) {
-            $price = $this->validatePrice('price', $params['price']);
+            $price = Validator::validatePrice('price', $params['price']);
         } else {
             throw new \Exception('Invalid input data', 400);
         }
