@@ -32,7 +32,7 @@ final class GetProduct extends AbstractResourceHandler implements RequestHandler
      *     operationId="getProduct",
      *     summary = "Returns all information about the single product.",
      *
-     *     @OA\Parameter(ref="#/components/schemas/Product/properties/id", in="path", required="true"),
+     *     @OA\Parameter(ref="#/components/schemas/Product/properties/id", in="path", required=true),
      *     @OA\Response(
      *      response="200",
      *      description="Product object",
