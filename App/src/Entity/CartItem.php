@@ -20,6 +20,15 @@ use Doctrine\ORM\Mapping\Table;
 
 /**
  * Cart item entity
+ *
+ * @OA\Schema(
+ *     description="Cart Item",
+ *     title="Cart Item",
+ *     required={"CartId", "ProductId", "Quantity"},
+ *     @OA\Xml(
+ *         name="CartItem"
+ *     )
+ * )
  */
 #[Entity, Table(name: 'cart')]
 final class CartItem

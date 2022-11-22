@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping\Table;
  * @OA\Schema(
  *     description="Product",
  *     title="Product",
- *     required={"title", "price"},
+ *     required={"Title", "Price"},
  *     @OA\Xml(
  *         name="Product"
  *     )
