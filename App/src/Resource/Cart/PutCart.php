@@ -32,13 +32,14 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
      *     tags={"cart"},
      *     path="/store/api/v1/carts/{id}",
      *     operationId="putCart",
-     *     summary = "Inserts a product to a cart with given identifier.",
+     *     summary = "Inserts (or removes) a product to/from a cart with given identifier.",
+     *     description = "Positive quantity value adds given number of pieces to the cart identified by ID. Negative quantity value substract appropriate number of pieces from the cart. If the resulting number is less than or equal to 0, the product is removed from the cart.",
      *
-     *     @OA\Parameter(name="id", in="path", required=false, description="The cart ID", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="id", in="path", required=false, description="The cart ID", example="b0145a23-14db-4219-b02a-53de833e470d", @OA\Schema(type="string")),
      *
      *     @OA\RequestBody(
      *         required=true,
-     *         description="Array with one or more products to be inserted to the cart.",
+     *         description="Array with one or more products to be inserted or removed to/from the cart.",
      *         @OA\JsonContent(
      *            required={"items"},
      *            @OA\Property(
@@ -55,13 +56,86 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
      *     @OA\Response(
      *      response="200",
      *      description="Cart was updated successfully",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="items",
+     *                  property="items",
+     *                  @OA\Items(
+     *                      @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *                      @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
+     *                  ),
+     *              ),
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="meta",
+     *                  property="meta",
+     *                  @OA\Items(
+     *                      @OA\Property(property="cart.id", ref="#/components/schemas/CartItem/properties/CartId"),
+     *                      @OA\Property(property="cart.total", type="number", example="99.99"),
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
      *     ),
      *
      *     @OA\Response(
      *      response="201",
      *      description="Cart was created successfully",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="items",
+     *                  property="items",
+     *                  @OA\Items(
+     *                      @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *                      @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
+     *                  ),
+     *              ),
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="meta",
+     *                  property="meta",
+     *                  @OA\Items(
+     *                      @OA\Property(property="cart.id", ref="#/components/schemas/CartItem/properties/CartId"),
+     *                      @OA\Property(property="cart.total", type="number", example="99.99"),
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
      *     ),
      *
+     *     @OA\Response(
+     *      response="304",
+     *      description="Not changed",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="items",
+     *                  property="items",
+     *                  @OA\Items(
+     *                      @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *                      @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
+     *                  ),
+     *              ),
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="meta",
+     *                  property="meta",
+     *                  @OA\Items(
+     *                      @OA\Property(property="cart.id", ref="#/components/schemas/CartItem/properties/CartId"),
+     *                      @OA\Property(property="cart.total", type="number", example="99.99"),
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
+     *     ),
      *     @OA\Response(
      *      response="400",
      *      description="Invalid input data",

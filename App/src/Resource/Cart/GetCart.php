@@ -36,7 +36,7 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
      *     operationId="getCart",
      *     summary = "Returns all the products added to a cart with given identifier, along with total sum.",
      *
-     *     @OA\Parameter(name="id", in="path", required=true, description="The cart ID", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="id", in="path", required=true, description="The cart ID", example="b0145a23-14db-4219-b02a-53de833e470d", @OA\Schema(type="string")),
      *
      *     @OA\Response(
      *      response="200",
@@ -45,8 +45,24 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
      *          title="items",
      *          type="array",
      *          @OA\Items(
-     *              @OA\Property(property="product.id", ref="#/components/schemas/CartItem/properties/ProductId"),
-     *              @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="items",
+     *                  property="items",
+     *                  @OA\Items(
+     *                      @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *                      @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
+     *                  ),
+     *              ),
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="meta",
+     *                  property="meta",
+     *                  @OA\Items(
+     *                      @OA\Property(property="cart.id", ref="#/components/schemas/CartItem/properties/CartId"),
+     *                      @OA\Property(property="cart.total", type="number", example="99.99"),
+     *                  ),
+     *              ),
      *          ),
      *      ),
      *     ),

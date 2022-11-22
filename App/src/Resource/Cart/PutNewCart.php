@@ -38,7 +38,7 @@ final class PutNewCart extends PutCart
      *                property="items",
      *                type="array",
      *                @OA\Items(
-     *                    @OA\Property(property="product.id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *                    @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
      *                    @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
      *                ),
      *            ),
@@ -48,6 +48,29 @@ final class PutNewCart extends PutCart
      *     @OA\Response(
      *      response="201",
      *      description="Cart was created successfully",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="items",
+     *                  property="items",
+     *                  @OA\Items(
+     *                      @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
+     *                      @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
+     *                  ),
+     *              ),
+     *              @OA\Property(
+     *                  type="array",
+     *                  title="meta",
+     *                  property="meta",
+     *                  @OA\Items(
+     *                      @OA\Property(property="cart.id", ref="#/components/schemas/CartItem/properties/CartId"),
+     *                      @OA\Property(property="cart.total", type="number", example="99.99"),
+     *                  ),
+     *              ),
+     *          ),
+     *      ),
      *     ),
      *
      *     @OA\Response(
