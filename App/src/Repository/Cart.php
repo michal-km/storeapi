@@ -34,7 +34,7 @@ class Cart
         if (isset($this->cartItems[$id])) {
             $oldQuantity = $this->cartItems[$id]->getQuantity();
             if ($oldQuantity != $quantity) {
-                $this->cartItems[$iid]->add($quantity);
+                $this->cartItems[$id]->add($quantity);
                 $this->changes++;
             }
         } else {
@@ -43,7 +43,7 @@ class Cart
         }
 
         if ($this->cartItems[$id]->getQuantity() <= 0) {
-            unset($this->carItems[$id]);
+            unset($this->cartItems[$id]);
             $this->changes++;
         }
     }

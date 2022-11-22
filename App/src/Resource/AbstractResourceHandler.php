@@ -105,7 +105,7 @@ abstract class AbstractResourceHandler
     /**
      * Returns a path to the API server.
      *
-     * @return Base API URL.
+     * @return string Base API URL.
      */
     protected function getServer(): string
     {
