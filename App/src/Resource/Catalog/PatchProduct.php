@@ -29,6 +29,8 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
      *     tags={"catalog"},
      *     path="/catalog/api/v1/products/{id}",
      *     operationId="patchProduct",
+     *     summary = "Updates a product in the catalog.",
+     *
      *     @OA\Parameter(
      *          name="id",
      *          in="path",

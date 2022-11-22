@@ -29,6 +29,14 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
      *     tags={"catalog"},
      *     path="/catalog/api/v1/products",
      *     operationId="listProducts",
+     *     summary = "Lists all the products from the catalog.",
+     *     description = "Results are spli to pages with three items on each.
+     *                    To fetch the first page, call the action without providing a cursor (or set it to 0).
+     *                    To fetch next page, use link provided in meta/cursor.next field, or use cursor variable as ID
+     *                    of the first product on the page.
+     *                    If there are no more results, no link is provided.
+     *                    If the cursor value is greater than the ID of any product, an empty set will be returned.",
+     *
      *     @OA\Parameter(
      *          name="cursor",
      *          in="query",

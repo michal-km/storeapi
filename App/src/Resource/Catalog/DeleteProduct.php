@@ -29,6 +29,8 @@ final class DeleteProduct extends AbstractResourceHandler implements RequestHand
      *     tags={"catalog"},
      *     path="/catalog/api/v1/products/{id}",
      *     operationId="deleteProduct",
+     *     summary = "Removes the products from the catalog.",
+     *
      *     @OA\Parameter(
      *          name="id",
      *          in="path",

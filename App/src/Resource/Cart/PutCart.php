@@ -32,6 +32,8 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
      *     tags={"cart"},
      *     path="/store/api/v1/carts/{id}",
      *     operationId="putCart",
+     *     summary = "Inserts a product to a cart with given identifier.",
+     *
      *     @OA\Parameter(
      *          name="id",
      *          in="path",

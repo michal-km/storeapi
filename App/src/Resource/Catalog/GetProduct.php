@@ -30,6 +30,8 @@ final class GetProduct extends AbstractResourceHandler implements RequestHandler
      *     tags={"catalog"},
      *     path="/catalog/api/v1/products/{id}",
      *     operationId="getProduct",
+     *     summary = "Returns all information about the single product.",
+     *
      *     @OA\Parameter(
      *          name="id",
      *          in="path",

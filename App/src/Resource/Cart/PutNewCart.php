@@ -27,6 +27,8 @@ final class PutNewCart extends PutCart
      *     tags={"cart"},
      *     path="/store/api/v1/carts",
      *     operationId="putNewCart",
+     *     summary = "Creates a new cart and inserts a product to it.",
+     *
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(

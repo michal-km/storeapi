@@ -29,6 +29,7 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
      *     tags={"catalog"},
      *     path="/catalog/api/v1/products",
      *     operationId="postProduct",
+     *     summary = "Creates a new product in the catalog.",
      *
      *     @OA\RequestBody(
      *         required=true,
