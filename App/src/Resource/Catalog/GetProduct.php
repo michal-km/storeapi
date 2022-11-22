@@ -32,7 +32,7 @@ final class GetProduct extends AbstractResourceHandler implements RequestHandler
      *     operationId="getProduct",
      *     summary = "Returns all information about the single product.",
      *
-     *     @OA\Parameter(name="id", in="path", required=true, description="The product ID", @OA\Schema(type="integer")),
+     *     @OA\Parameter(name="id", in="path", required=true, description="The product ID", example="39", @OA\Schema(type="integer")),
      *
      *     @OA\Response(
      *      response="200",
@@ -64,20 +64,13 @@ final class GetProduct extends AbstractResourceHandler implements RequestHandler
         $server = 'http://localhost:8080/';
         $id = $this->validateInteger('id', $request->getAttribute('id'));
         $productRepository = $this->getEntityManager()->getRepository(Product::class);
-        $p = $productRepository->find($id);
-        if (!$p) {
+        $product = $productRepository->find($id);
+        if (!$product) {
             throw new \Exception("Product not found", 404);
         }
-        $productData = [
-            'id' => $p->getId(),
-            'title' => $p->getTitle(),
-            'price' => $p->getPrice() / 100,
-            'link' => $server . 'catalog/api/v1/products/' . $p->getId(),
-        ];
 
-        $data = [
-            'product' => $productData,
+        return [
+            'product' => $product->getJSON($server . 'catalog/api/v1/products/'),
         ];
-        return $data;
     }
 }

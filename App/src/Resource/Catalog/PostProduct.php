@@ -100,23 +100,14 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
         $product = new Product($title, $price);
         $em->persist($product);
         $em->flush();
-        $newId = $product->getId();
-        if (null === $newId) {
+        if (null === $product->getId()) {
             print "NewId = null";
             throw new \Exception("Product could not be created", 500);
         }
 
-        $productData = [
-            'id' => $newId,
-            'title' => $product->getTitle(),
-            'price' => $product->getPrice() / 100,
-            'link' => $server . 'catalog/api/v1/products/' . $newId,
-        ];
-
-        $data = [
-            'product' => $productData,
+        return [
+            'product' => $product->getJSON($server . 'catalog/api/v1/products/'),
             'code' => 201,
         ];
-        return $data;
     }
 }

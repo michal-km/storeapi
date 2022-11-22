@@ -31,7 +31,7 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
      *     operationId="patchProduct",
      *     summary = "Updates a product in the catalog.",
      *
-     *     @OA\Parameter(name="id", in="path", required=true, description="The product ID", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="id", in="path", required=true, description="The product ID", example="39", @OA\Schema(type="string")),
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -128,16 +128,8 @@ final class PatchProduct extends AbstractResourceHandler implements RequestHandl
             throw new \Exception("Not changed", 304);
         }
 
-        $productData = [
-            'id' => $product->getId(),
-            'title' => $product->getTitle(),
-            'price' => $product->getPrice() / 100,
-            'link' => $server . 'catalog/api/v1/products/' . $product->getId(),
+        return [
+            'product' => $product->getJSON($server . 'catalog/api/v1/products/'),
         ];
-
-        $data = [
-            'product' => $productData,
-        ];
-        return $data;
     }
 }

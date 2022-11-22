@@ -69,22 +69,34 @@ final class Product
     #[Column(type: 'integer', nullable: false)]
     private ?int $Price = null;
 
+    /**
+     * {@inheritDoc}
+     */
     public function __construct(string $title, int $price)
     {
         $this->Title = $title;
         $this->Price = $price;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getTitle(): ?string
     {
         return $this->Title;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setTitle(string $Title): self
     {
         $this->Title = $Title;
@@ -92,15 +104,38 @@ final class Product
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getPrice(): ?int
     {
         return $this->Price;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setPrice(int $Price): self
     {
         $this->Price = $Price;
 
         return $this;
+    }
+
+    /**
+     * Returns a product array for JSON response.
+     *
+     * @param string $url Link to GetProduct API action.
+     *
+     * @return array Array with product data.
+     */
+    public function getJSON(string $url): array
+    {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'price' => $this->getPrice() / 100,
+            'link' => $url . $this->getId(),
+        ];
     }
 }

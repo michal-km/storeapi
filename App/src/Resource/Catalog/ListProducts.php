@@ -72,12 +72,7 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
         $productList = [];
         $products = $productRepository->findBy([], [], $pageSize, $cursor);
         foreach ($products as $p) {
-            $productList[] = [
-                'id' => $p->getId(),
-                'title' => $p->getTitle(),
-                'price' => $p->getPrice() / 100,
-                'link' => $server . 'catalog/api/v1/products/' . $p->getId(),
-            ];
+            $productList[] = $p->getJSON($server . 'catalog/api/v1/products/');
         }
 
         // find next product id
@@ -98,7 +93,6 @@ final class ListProducts extends AbstractResourceHandler implements RequestHandl
             'products' => $productList,
             'meta' => [
                 'total.count' => $totalProducts,
-                //'post' => $request->getParsedBody(),
             ],
         ];
         if ($next) {

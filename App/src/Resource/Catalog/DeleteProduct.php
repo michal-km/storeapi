@@ -31,7 +31,7 @@ final class DeleteProduct extends AbstractResourceHandler implements RequestHand
      *     operationId="deleteProduct",
      *     summary = "Removes the products from the catalog.",
      *
-     *     @OA\Parameter(name="id", in="path", required=true, description="The product ID", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="id", in="path", required=true, description="The product ID", example="39", @OA\Schema(type="string")),
      *
      *     @OA\Response(
      *      response="204",
