@@ -20,16 +20,61 @@ use Doctrine\ORM\Mapping\Table;
 
 /**
  * Product entity
+ *
+ * @OA\Schema(
+ *     description="Product",
+ *     title="Product",
+ *     required={"title", "price"},
+ *     @OA\Xml(
+ *         name="Product"
+ *     )
+ * )
  */
 #[Entity, Table(name: 'product')]
 final class Product
 {
+    /**
+     * @OA\Parameter(
+     *     format="int64",
+     *     type="number",
+     *     description="The product identifier",
+     *     title="Product ID",
+     *     example=39
+     * )
+     */
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
 
+    /**
+     * @OA\Property(
+     *     format="string",
+     *     type="string",
+     *     description="Product title",
+     *     title="Title",
+     *     example="Baldur's Gate",
+     *     minLength=1,
+     *     maxLength=255
+     * )
+     *
+     * @var string
+     */
     #[Column(type: 'string', unique: true, nullable: false)]
     private ?string $Title = null;
 
+    /**
+     * @OA\Property(
+     *     format="number",
+     *     type="number",
+     *     description="Product price (floating point)",
+     *     title="Price",
+     *     example=3.99,
+     *     minimum=0
+     * )
+     *
+     * A floating point number given in the API call will be multiplied by 100 and stored as an integer.
+     *
+     * @var int
+     */
     #[Column(type: 'integer', nullable: false)]
     private ?int $Price = null;
 

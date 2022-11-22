@@ -27,12 +27,45 @@ final class CartItem
     #[Id, Column(type: 'integer'), GeneratedValue(strategy: 'AUTO')]
     private ?int $id = null;
 
+    /**
+     * @OA\Property(
+     *     format="string",
+     *     type="string",
+     *     description="Carti ID (globally uniqie identifier)",
+     *     title="Cart ID",
+     *     example="b0145a23-14db-4219-b02a-53de833e470d"
+     * )
+     *
+     * @var string
+     */
     #[Column(type: 'string', nullable: false)]
     private ?string $CartId = null;
 
+    /**
+     * @OA\Property(
+     *     format="int64r",
+     *     type="number",
+     *     description="Product identifier",
+     *     title="Product ID",
+     *     example=39
+     * )
+     *
+     * @var int
+     */
     #[Column(type: 'integer', nullable: false)]
     private ?int $ProductId = null;
 
+    /**
+     * @OA\Property(
+     *     format="int64r",
+     *     type="number",
+     *     description="Number of pieces.",
+     *     title="Quantity",
+     *     example=5
+     * )
+     *
+     * @var int
+     */
     #[Column(type: 'integer', nullable: false)]
     private ?int $Quantity = null;
 
