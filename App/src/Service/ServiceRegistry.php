@@ -61,9 +61,5 @@ final class ServiceRegistry implements ServiceProvider
         $c->set(SwaggerController::class, static function (ContainerInterface $c): SwaggerController {
             return new SwaggerController($c);
         });
-
-        $c->set(Cart::class, static function (ContainerInterface $c): Cart {
-            return new Cart($c);
-        });
     }
 }

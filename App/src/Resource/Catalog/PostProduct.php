@@ -90,7 +90,6 @@ final class PostProduct extends AbstractResourceHandler implements RequestHandle
         $em->persist($product);
         $em->flush();
         if (null === $product->getId()) {
-            print "NewId = null";
             throw new \Exception("Product could not be created", 500);
         }
 

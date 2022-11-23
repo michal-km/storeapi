@@ -14,7 +14,6 @@ namespace App\Resource\Cart;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Psr\Container\ContainerInterface;
 use App\Resource\AbstractResourceHandler;
 use App\Validator\Validator;
 use App\Repository\Cart;
@@ -88,7 +87,7 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
         $this->authorize($request, "user");
         $cartId = Validator::validateString('id', $request->getAttribute('id'));
 
-        $cart = new Cart($this->getServiceContainer(), $cartId);
+        $cart = new Cart($this->getEntityManager(), $cartId);
         if ($cart->isEmpty()) {
             throw new \Exception('Cart not found', 404);
         }

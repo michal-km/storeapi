@@ -69,6 +69,9 @@ final class CartItem
     #[Column(type: 'integer', nullable: false)]
     private ?int $Quantity = null;
 
+    /**
+     * {@inheritDoc}
+     */
     public function __construct(string $cartId, int $productId, int $quantity)
     {
         $this->CartId = $cartId;
@@ -76,16 +79,25 @@ final class CartItem
         $this->Quantity = $quantity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getCartId(): ?string
     {
         return $this->CartId;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setCartId(string $CartId): self
     {
         $this->CartId = $CartId;
@@ -93,11 +105,17 @@ final class CartItem
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getProductId(): ?int
     {
         return $this->ProductId;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setProductId(int $ProductId): self
     {
         $this->ProductId = $ProductId;
@@ -105,11 +123,17 @@ final class CartItem
         return $this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getQuantity(): ?int
     {
         return $this->Quantity;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function setQuantity(int $Quantity): self
     {
         $this->Quantity = $Quantity;

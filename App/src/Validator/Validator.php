@@ -63,4 +63,21 @@ class Validator
         }
         return (string) $value;
     }
+
+    /**
+     * Assures that provided value is a valid GUID, throws exception otherwise.
+     *
+     * @param string $name  Argument name for reference.
+     * @param mixed  $value Value that needs validation.
+     *
+     * @return string Validated string.
+     */
+    public static function validateGUID(string $name, mixed $value): string
+    {
+        $value = (string) $value;
+        if (!preg_match("/^(\{)?[a-f\d]{8}(-[a-f\d]{4}){4}[a-f\d]{8}(?(1)\})$/i", $value)) {
+            throw new \Exception("Invalid input parameter \"" . $name . "\"", 400);
+        }
+        return (string) $value;
+    }
 }
