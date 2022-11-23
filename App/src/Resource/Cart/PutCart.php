@@ -32,7 +32,8 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
      *     summary = "Inserts (or removes) a product to/from a cart with given identifier.",
      *     description = "Positive quantity value adds given number of pieces to the cart identified by ID. Negative quantity value substract appropriate number of pieces from the cart. If the resulting number is less than or equal to 0, the product is removed from the cart.",
      *
-     *     @OA\Parameter(name="id", in="path", required=false, description="The cart ID", example="b0145a23-14db-4219-b02a-53de833e470d", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="id", in="path", required=false,
+     *     description="The cart ID", example="b0145a23-14db-4219-b02a-53de833e470d", @OA\Schema(type="string")),
      *
      *     @OA\RequestBody(
      *         required=true,

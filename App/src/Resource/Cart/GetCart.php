@@ -35,7 +35,8 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
      *     operationId="getCart",
      *     summary = "Returns all the products added to a cart with given identifier, along with total sum.",
      *
-     *     @OA\Parameter(name="id", in="path", required=true, description="The cart ID", example="b0145a23-14db-4219-b02a-53de833e470d", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="id", in="path", required=true,
+     *     description="The cart ID", example="b0145a23-14db-4219-b02a-53de833e470d", @OA\Schema(type="string")),
      *
      *     @OA\Response(
      *      response="200",

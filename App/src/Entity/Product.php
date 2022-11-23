@@ -57,7 +57,7 @@ final class Product
 
     /**
      * @OA\Property(
-     *     description="Product price (floating point)",
+     *     description="Product price (floating point, stored internally after multiplication by 100 as an integer)",
      *     example=3.99,
      *     minimum=0
      * )
