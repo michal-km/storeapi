@@ -57,12 +57,13 @@ final class DeleteCart extends AbstractResourceHandler implements RequestHandler
         $this->authorize($request, "user");
         $cartId = validator::validateString('id', $request->getAttribute('id'));
 
-        $cart = new Cart($this->getEntityManager(), $cartId);
-        if ($cart->isEmpty()) {
-            throw new \Exception("Cart not found", 404);
+        $cart = new Cart($this->getEntityManager());
+        $cart->load($cartId);
+        if ($cart->items()->isEmpty()) {
+            throw new \Exception('Cart not found', 404);
         }
 
-        $cart->clear();
+        $cart->truncate();
 
         return [
             'status' => 'deleted',

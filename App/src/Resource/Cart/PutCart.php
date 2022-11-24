@@ -157,15 +157,16 @@ class PutCart extends AbstractResourceHandler implements RequestHandlerInterface
 
         // load or create cart
         $id = $request->getAttribute('id');
-        $cart = new Cart($this->getEntityManager(), $id);
-        if ($cart->isEmpty()) {
+        $cart = new Cart($this->getEntityManager());
+        $cart->load($id);
+        if ($cart->items()->isEmpty()) {
             $created = true;
         }
 
         // update with provided data
-        $cart->update($params['items']);
+        $cart->processRequestData($params['items']);
 
-        if (!$cart->hasChanged()) {
+        if (!$cart->items()->hasChanged()) {
             throw new \Exception('Not changed', 304);
         }
 

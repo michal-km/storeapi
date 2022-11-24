@@ -88,8 +88,9 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
         $this->authorize($request, "user");
         $cartId = Validator::validateString('id', $request->getAttribute('id'));
 
-        $cart = new Cart($this->getEntityManager(), $cartId);
-        if ($cart->isEmpty()) {
+        $cart = new Cart($this->getEntityManager());
+        $cart->load($cartId);
+        if ($cart->items()->isEmpty()) {
             throw new \Exception('Cart not found', 404);
         }
 

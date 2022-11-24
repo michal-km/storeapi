@@ -12,24 +12,26 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Entity\Product;
+
 class CartItem
 {
     private ?int $id;
-    private int $productId;
+    private Product $product;
     private int $quantity;
 
-    public function __construct(int $productId, int $quantity, ?int $id = null)
+    public function __construct(Product $product, int $quantity, ?int $id = null)
     {
         $this->id = $id;
-        $this->productId = $productId;
         $this->quantity = $quantity;
+        $this->product = $product;
     }
 
-    public function add(int $quantity): void
+    public function update(int $quantity): void
     {
         $this->quantity += $quantity;
-        if ($quantity < 0) {
-            $quantity = 0;
+        if ($this->quantity < 0) {
+            $this->quantity = 0;
         }
     }
 
@@ -38,9 +40,9 @@ class CartItem
         return $this->id;
     }
 
-    public function getProductId(): int
+    public function getProduct(): Product
     {
-        return $this->productId;
+        return $this->product;
     }
 
     public function getQuantity(): int
@@ -48,10 +50,12 @@ class CartItem
         return $this->quantity;
     }
 
-    public function getJSON(): array
+    public function getJSON(string $url): array
     {
         return [
-
+            'id' => $this->getProduct()->getId(),
+            'quantity' => $this->getQuantity(),
+            'link' => $url . 'catalog/api/v1/products/' . $this->getProduct()->getId(),
         ];
     }
 }
