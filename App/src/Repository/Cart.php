@@ -19,12 +19,18 @@ use App\Repository\StorableCartItemCollection;
 use App\Repository\GUID;
 use App\Validator\Validator;
 
+/**
+ * Simplified shopping cart representation
+ */
 class Cart
 {
     private StorableCartItemCollection $cartItems;
     private EntityManager $entityManager;
     private ?string $cartId;
 
+    /**
+     * {@inhertitDoc}
+     */
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -32,17 +38,28 @@ class Cart
         $this->cartId = GUID::create();
     }
 
+    /**
+     * Loads cart content from the storage.
+     *
+     * @param ?string $cartId Cart GUID;
+     */
     public function load(?string $cartId): void
     {
         $this->cartId = GUID::create($cartId);
         $this->cartItems->load($this->cartId);
     }
 
+    /**
+     * Saves cart content in the storage.
+     */
     public function save(): void
     {
         $this->cartItems->save($this->cartId);
     }
 
+    /**
+     * Removes whole cart content from the storage.
+     */
     public function truncate(): void
     {
         $this->cartItems->truncate($this->cartId);
@@ -118,6 +135,13 @@ class Cart
         }
     }
 
+    /**
+     * Helper function, loads a product with given ID.
+     *
+     * @param int $id Product ID.
+     *
+     * @return ?Product Product entity or null if no such product exist.
+     */
     private function getProduct(int $id): ?Product
     {
         $product = $this->entityManager

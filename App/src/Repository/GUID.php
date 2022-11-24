@@ -15,12 +15,11 @@ namespace App\Repository;
 class GUID
 {
     /**
-     * Validates cart ID.
-     * If ID is invalid or empty, a new unique identifier is created.
+     * Creates a Globally Unique Identifier.
      *
-     * @param mixed $idParam Card ID to be validated.
+     * @param mixed $idParam If provided, the function will check for its validity.
      *
-     * @return string GUID.
+     * @return string Returns a GUID (either $id if it is a valid GUID  or a new one).
      */
     public static function create(?string $id = null): string
     {
