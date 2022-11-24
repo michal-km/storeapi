@@ -22,7 +22,7 @@ use Countable;
  * Cannot contain duplicate indexes (keys).
  * Tracks number of changes.
  */
-class AbstractCollection implements Iterator, Countable
+class Collection implements Iterator, Countable
 {
     private array $items;
     private int $changes;

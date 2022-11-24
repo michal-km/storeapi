@@ -12,12 +12,12 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Repository\AbstractCollection;
+use App\Repository\Collection;
 
 /**
  * Collection of CartItem items.
  */
-class CartItemCollection extends AbstractCollection
+class CartItemCollection extends Collection
 {
     /**
      * Updates or inserts a CartItem object into collection.
