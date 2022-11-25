@@ -36,20 +36,9 @@ final class DeleteCart extends AbstractResourceHandler implements RequestHandler
      *     @OA\Parameter(name="id", in="path", required=true,
      *     description="The cart ID", example="b0145a23-14db-4219-b02a-53de833e470d", @OA\Schema(type="string")),
      *
-     *     @OA\Response(
-     *      response="200",
-     *      description="Cart was deleted successfully",
-     *     ),
-     *
-     *     @OA\Response(
-     *      response="404",
-     *      description="Cart not found",
-     *     ),
-     *
-     *     @OA\Response(
-     *      response="500",
-     *      description="Server error",
-     *     )
+     *     @OA\Response(response="200", description="Cart was deleted successfully"),
+     *     @OA\Response(response="404", description="Cart not found"),
+     *     @OA\Response(response="500", description="Server error")
      * )
      */
     protected function processRequest(ServerRequestInterface $request): mixed

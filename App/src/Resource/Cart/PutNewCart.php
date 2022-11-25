@@ -29,59 +29,11 @@ final class PutNewCart extends PutCart
      *     operationId="putNewCart",
      *     summary = "Creates a new cart and inserts a product to it.",
      *
-     *     @OA\RequestBody(
-     *         required=true,
-     *         description="Array with one or more products to be inserted to the cart.",
-     *         @OA\JsonContent(
-     *            required={"items"},
-     *            @OA\Property(
-     *                property="items",
-     *                type="array",
-     *                @OA\Items(
-     *                    @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
-     *                    @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
-     *                ),
-     *            ),
-     *         ),
-     *      ),
+     *     @OA\RequestBody(ref="#/components/requestBodies/request_cart_items"),
      *
-     *     @OA\Response(
-     *      response="201",
-     *      description="Cart was created successfully",
-     *      @OA\JsonContent(
-     *          type="array",
-     *          @OA\Items(
-     *              @OA\Property(
-     *                  type="array",
-     *                  title="items",
-     *                  property="items",
-     *                  @OA\Items(
-     *                      @OA\Property(property="id", ref="#/components/schemas/CartItem/properties/ProductId"),
-     *                      @OA\Property(property="quantity", ref="#/components/schemas/CartItem/properties/Quantity"),
-     *                  ),
-     *              ),
-     *              @OA\Property(
-     *                  type="array",
-     *                  title="meta",
-     *                  property="meta",
-     *                  @OA\Items(
-     *                      @OA\Property(property="cart.id", ref="#/components/schemas/CartItem/properties/CartId"),
-     *                      @OA\Property(property="cart.total", type="number", example="99.99"),
-     *                  ),
-     *              ),
-     *          ),
-     *      ),
-     *     ),
-     *
-     *     @OA\Response(
-     *      response="400",
-     *      description="Invalid input data",
-     *     ),
-     *
-     *    @OA\Response(
-     *      response="500",
-     *      description="Server error",
-     *     )
+     *     @OA\Response(response="201", description="Cart was created successfully", @OA\JsonContent(ref="#/components/schemas/cart_info")),
+     *     @OA\Response(response="400", description="Invalid input data"),
+     *     @OA\Response(response="500", description="Server error")
      * )
      */
     protected function processRequest(ServerRequestInterface $request): mixed

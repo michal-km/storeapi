@@ -67,20 +67,9 @@ final class GetCart extends AbstractResourceHandler implements RequestHandlerInt
      *      ),
      *     ),
      *
-     *     @OA\Response(
-     *      response="404",
-     *      description="Cart with a given ID could not be found",
-     *     ),
-     *
-     *     @OA\Response(
-     *      response="400",
-     *      description="Invalid ID parameter",
-     *     ),
-     *
-     *    @OA\Response(
-     *      response="500",
-     *      description="Server error",
-     *     )
+     *     @OA\Response(response="404", description="Cart with a given ID could not be found"),
+     *     @OA\Response(response="400", description="Invalid ID parameter"),
+     *     @OA\Response(response="500", description="Server error")
      * )
      */
     protected function processRequest(ServerRequestInterface $request): mixed

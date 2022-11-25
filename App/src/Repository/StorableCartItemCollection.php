@@ -28,8 +28,7 @@ class StorableCartItemCollection extends CartItemCollection
                 $product = $this->entityManager->getRepository(ProductEntity::class)->find($item->getProductId());
                 $this->upsert(new CartItem(
                     $product,
-                    $item->getQuantity(),
-                    $item->getId()
+                    $item->getQuantity()
                 ));
             }
         }

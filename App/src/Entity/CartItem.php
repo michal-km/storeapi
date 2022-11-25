@@ -38,7 +38,7 @@ final class CartItem
 
     /**
      * @OA\Property(
-     *     description="Carti ID (globally uniqie identifier)",
+     *     description="Cart ID (globally uniqie identifier)",
      *     example="b0145a23-14db-4219-b02a-53de833e470d"
      * )
      *
